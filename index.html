@@ -653,6 +653,40 @@
       line-height: 1.6;
     }
 
+    /* ─── STUDY GUIDES ─── */
+    #studyguides {
+      background: var(--parchment);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .book-list { display: flex; flex-direction: column; gap: 2rem; }
+    .book-entry { border: 1px solid var(--border); background: var(--cream); overflow: hidden; transition: box-shadow 0.3s; }
+    .book-entry:hover { box-shadow: 0 8px 32px rgba(61,43,31,0.10); }
+    .book-header { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1.5rem; padding: 1.75rem 2rem; cursor: pointer; border-bottom: 1px solid transparent; transition: border-color 0.3s, background 0.2s; }
+    .book-entry.open .book-header { border-bottom-color: var(--border); background: var(--parchment-dark); }
+    .book-spine { width: 48px; height: 64px; background: linear-gradient(135deg, var(--brown), var(--sienna)); display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 3px 3px 8px rgba(0,0,0,0.2); }
+    .book-spine-text { font-family: 'Cormorant SC', serif; font-size: 0.6rem; color: var(--gold-light); letter-spacing: 0.1em; writing-mode: vertical-rl; transform: rotate(180deg); }
+    .book-subject { font-family: 'Cormorant SC', serif; font-size: 0.72rem; letter-spacing: 0.25em; color: var(--gold); margin-bottom: 0.3rem; }
+    .book-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; color: var(--brown); line-height: 1.3; margin-bottom: 0.2rem; }
+    .book-author { font-size: 0.9rem; font-style: italic; color: var(--sienna); }
+    .book-toggle { font-size: 1.3rem; color: var(--gold); transition: transform 0.3s; user-select: none; padding: 0.5rem; }
+    .book-entry.open .book-toggle { transform: rotate(180deg); }
+    .book-content { display: none; padding: 2rem; gap: 2rem; grid-template-columns: 1fr 1fr; }
+    .book-entry.open .book-content { display: grid; }
+    .book-section-title { font-family: 'Cormorant SC', serif; font-size: 0.78rem; letter-spacing: 0.2em; color: var(--gold); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+    .guide-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .guide-item { display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 0.75rem; border: 1px solid var(--border); background: var(--parchment); font-size: 0.92rem; color: var(--brown); transition: border-color 0.2s, background 0.2s; }
+    .guide-item:hover { border-color: var(--gold); background: var(--parchment-dark); }
+    .guide-download { font-family: 'Cormorant SC', serif; font-size: 0.7rem; letter-spacing: 0.15em; color: var(--gold); text-decoration: none; padding: 0.2rem 0.6rem; border: 1px solid rgba(154,123,47,0.3); transition: all 0.2s; }
+    .guide-download:hover { background: var(--gold); color: var(--cream); }
+    .guide-coming { font-family: 'Cormorant SC', serif; font-size: 0.7rem; letter-spacing: 0.1em; color: var(--border); }
+    .related-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .related-item { padding: 0.6rem 0.75rem; border-left: 2px solid var(--border); font-size: 0.92rem; color: var(--sienna); font-style: italic; transition: border-color 0.2s; }
+    .related-item:hover { border-left-color: var(--gold); color: var(--brown); }
+    .related-tag { display: inline-block; font-family: 'Cormorant SC', serif; font-size: 0.65rem; letter-spacing: 0.15em; color: var(--gold); background: rgba(154,123,47,0.08); padding: 0.1rem 0.4rem; margin-right: 0.4rem; font-style: normal; }
+    .studyguides-note { margin-top: 2.5rem; padding: 1.5rem 2rem; border: 1px dashed var(--border); text-align: center; font-style: italic; color: var(--sienna); font-size: 0.95rem; }
+    @media (max-width: 768px) { .book-content { grid-template-columns: 1fr; } .book-header { grid-template-columns: auto 1fr auto; gap: 1rem; padding: 1.25rem; } }
+
     /* ─── ANIMATIONS ─── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
@@ -696,6 +730,7 @@
       <li><a href="#about">About</a></li>
       <li><a href="#courses">Courses</a></li>
       <li><a href="#essays">Essays</a></li>
+      <li><a href="#studyguides">Study Guides</a></li>
       <li><a href="#resources">Resources</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -753,54 +788,62 @@
         <div class="section-label">Free Courses</div>
         <h2 class="section-title">The Open Curriculum</h2>
         <div class="section-divider"></div>
-        <p style="max-width:600px; color:var(--sienna); margin-bottom:2.5rem; font-style:italic;">Every course here is free. No login required. No paywall. Just knowledge — structured, rigorous, and built for anyone ready to think seriously.</p>
+        <p style="max-width:600px; color:var(--sienna); margin-bottom:2.5rem; font-style:italic;">A complete philosophy curriculum from undergraduate to doctoral level — structured exactly like a real university degree. Every course is free, with video lectures, study guides, and reading materials for every text.</p>
       </div>
       <div class="courses-grid">
+
+        <div class="course-card reveal">
+          <div class="course-icon">📖</div>
+          <div class="course-tag">Undergraduate · Level I</div>
+          <div class="course-title">Introduction to Philosophy</div>
+          <div class="course-desc">The foundations of philosophical thinking — knowledge, reality, mind, ethics, and the nature of argument. The starting point for every serious student of ideas. Covers Russell, Warburton, Descartes, and Blackburn.</div>
+          <span class="course-badge">Coming Soon</span>
+        </div>
+
         <div class="course-card reveal">
           <div class="course-icon">🏛️</div>
-          <div class="course-tag">Ancient History</div>
-          <div class="course-title">The Greek World: From Polis to Empire</div>
-          <div class="course-desc">A structured survey of ancient Greece from the Archaic period through the conquests of Alexander — covering politics, culture, warfare, and philosophy.</div>
+          <div class="course-tag">Undergraduate · Level II–III</div>
+          <div class="course-title">Ancient Philosophy</div>
+          <div class="course-desc">From the Presocratics to Aristotle — the birth of Western thought. Covers Thales, Heraclitus, Parmenides, Socrates, Plato's dialogues, Aristotle's ethics and metaphysics, and the Hellenistic schools.</div>
           <span class="course-badge">Coming Soon</span>
         </div>
+
         <div class="course-card reveal">
-          <div class="course-icon">🦉</div>
-          <div class="course-tag">Philosophy</div>
-          <div class="course-title">The Presocratics to Aristotle</div>
-          <div class="course-desc">Begin where philosophy began. From Thales and the Milesians through Socrates, Plato, and Aristotle — the foundation of all Western thought.</div>
+          <div class="course-icon">⚗️</div>
+          <div class="course-tag">Undergraduate · Level III–IV</div>
+          <div class="course-title">Early Modern Philosophy</div>
+          <div class="course-desc">The revolutionary thinkers who built the modern world — Descartes, Spinoza, Leibniz, Locke, Hume, and Kant. Covers the rationalist-empiricist debate, the Copernican revolution in philosophy, and the foundations of modern science.</div>
           <span class="course-badge">Coming Soon</span>
         </div>
-        <div class="course-card reveal">
-          <div class="course-icon">📜</div>
-          <div class="course-tag">Research Methods</div>
-          <div class="course-title">Introduction to Qualitative Research</div>
-          <div class="course-desc">What it means to do serious qualitative research — from ontological assumptions and theoretical frameworks to coding and analysis.</div>
-          <span class="course-badge">Coming Soon</span>
-        </div>
-        <div class="course-card reveal">
-          <div class="course-icon">✍️</div>
-          <div class="course-tag">Academic Writing</div>
-          <div class="course-title">Writing Like a Scholar</div>
-          <div class="course-desc">From structuring arguments to mastering APA citation and avoiding the most common mistakes that separate undergraduate prose from doctoral writing.</div>
-          <span class="course-badge">Coming Soon</span>
-        </div>
-        <div class="course-card reveal">
-          <div class="course-icon">🏺</div>
-          <div class="course-tag">Ancient Egypt</div>
-          <div class="course-title">Egypt & the Greek World</div>
-          <div class="course-desc">Exploring the deep intellectual and cultural exchange between ancient Egypt and Greece — the roots that shaped classical civilization.</div>
-          <span class="course-badge">Coming Soon</span>
-        </div>
+
         <div class="course-card reveal">
           <div class="course-icon">⚖️</div>
-          <div class="course-tag">Ethics & Society</div>
-          <div class="course-title">AI, Ethics & the Human Question</div>
-          <div class="course-desc">A philosophically grounded examination of artificial intelligence through the lens of classical ethics, moral philosophy, and what it means to be human.</div>
+          <div class="course-tag">Undergraduate · Level III–IV</div>
+          <div class="course-title">Ethics & Political Philosophy</div>
+          <div class="course-desc">How should we live? How should society be organized? Covers Hobbes, Locke, Rousseau, Mill, and Kant — the social contract, utilitarianism, the categorical imperative, and the foundations of liberal democracy.</div>
           <span class="course-badge">Coming Soon</span>
         </div>
+
+        <div class="course-card reveal">
+          <div class="course-icon">∴</div>
+          <div class="course-tag">Undergraduate · Level IV</div>
+          <div class="course-title">Logic & Critical Thinking</div>
+          <div class="course-desc">The tools of rigorous reasoning — formal and informal logic, argument structure, fallacies, propositional and predicate logic. The foundation every serious scholar needs before engaging advanced philosophical texts.</div>
+          <span class="course-badge">Coming Soon</span>
+        </div>
+
+        <div class="course-card reveal">
+          <div class="course-icon">📚</div>
+          <div class="course-tag">Graduate · MA Level</div>
+          <div class="course-title">History of Philosophy</div>
+          <div class="course-desc">A graduate-level survey of the complete Western canon — Copleston's 9-volume History, Kant's Critique of Pure Reason, Hegel's Phenomenology of Spirit, and Nietzsche's Genealogy of Morality. Philosophy at full scholarly depth.</div>
+          <span class="course-badge">Coming Soon</span>
+        </div>
+
       </div>
+
       <div class="coming-soon-banner reveal">
-        Courses launch in 2026. <a href="#contact" style="color:var(--gold); text-decoration:none;">Join the mailing list</a> to be notified when enrollment opens.
+        This is the complete philosophy curriculum from undergraduate to doctoral level — taught free for everyone. More courses loading as content is produced. <a href="#contact" style="color:var(--gold); text-decoration:none;">Subscribe</a> to be notified.
       </div>
     </div>
   </section>
@@ -849,12 +892,138 @@
     </div>
   </section>
 
+  <!-- STUDY GUIDES -->
+  <section id="studyguides">
+    <div class="section-inner">
+      <div class="reveal">
+        <div class="section-label">Study Guides</div>
+        <h2 class="section-title">The Scholar's Library</h2>
+        <div class="section-divider"></div>
+        <p style="max-width:640px; color:var(--sienna); margin-bottom:2.5rem; font-style:italic;">Each book in this library contains downloadable chapter-by-chapter study guides, related essays, and curated research — everything you need to engage seriously with the great texts of Western thought.</p>
+      </div>
+      <div class="book-list">
+
+        <!-- COPLESTON -->
+        <div class="book-entry reveal">
+          <div class="book-header" onclick="toggleBook(this)">
+            <div class="book-spine"><span class="book-spine-text">Copleston</span></div>
+            <div class="book-info">
+              <div class="book-subject">History of Philosophy</div>
+              <div class="book-title">A History of Philosophy</div>
+              <div class="book-author">Frederick Copleston, S.J. — 9 Volumes</div>
+            </div>
+            <div class="book-toggle">▾</div>
+          </div>
+          <div class="book-content">
+            <div>
+              <div class="book-section-title">📄 Study Guides</div>
+              <ul class="guide-list">
+                <li class="guide-item">
+                  Vol. I — Greece & Rome: Chapter 1
+                  <span class="guide-coming">Coming Soon</span>
+                </li>
+                <li class="guide-item">
+                  Vol. I — Greece & Rome: Chapter 2
+                  <span class="guide-coming">Coming Soon</span>
+                </li>
+                <li class="guide-item">
+                  Vol. I — Greece & Rome: Chapter 3
+                  <span class="guide-coming">Coming Soon</span>
+                </li>
+                <li class="guide-item">
+                  Vol. II — Medieval Philosophy
+                  <span class="guide-coming">Coming Soon</span>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <div class="book-section-title">✍️ Related Essays & Research</div>
+              <ul class="related-list">
+                <li class="related-item"><span class="related-tag">Essay</span>On Hubris: What the Greeks Knew That We Have Forgotten</li>
+                <li class="related-item"><span class="related-tag">Essay</span>Solon of Athens and the Invention of Democratic Thought</li>
+                <li class="related-item"><span class="related-tag">Research</span>The Presocratic Tradition: From Thales to Heraclitus</li>
+                <li class="related-item"><span class="related-tag">Resource</span>Recommended Secondary Reading for Copleston Vol. I</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- PLATO -->
+        <div class="book-entry reveal">
+          <div class="book-header" onclick="toggleBook(this)">
+            <div class="book-spine"><span class="book-spine-text">Plato</span></div>
+            <div class="book-info">
+              <div class="book-subject">Ancient Philosophy</div>
+              <div class="book-title">The Republic</div>
+              <div class="book-author">Plato — trans. G.M.A. Grube</div>
+            </div>
+            <div class="book-toggle">▾</div>
+          </div>
+          <div class="book-content">
+            <div>
+              <div class="book-section-title">📄 Study Guides</div>
+              <ul class="guide-list">
+                <li class="guide-item">Book I — Justice Defined <span class="guide-coming">Coming Soon</span></li>
+                <li class="guide-item">Books II–IV — The Ideal City <span class="guide-coming">Coming Soon</span></li>
+                <li class="guide-item">Books V–VII — Philosopher Kings <span class="guide-coming">Coming Soon</span></li>
+                <li class="guide-item">Books VIII–X — Decline & the Soul <span class="guide-coming">Coming Soon</span></li>
+              </ul>
+            </div>
+            <div>
+              <div class="book-section-title">✍️ Related Essays & Research</div>
+              <ul class="related-list">
+                <li class="related-item"><span class="related-tag">Essay</span>Plato's Cave and the Problem of Knowledge</li>
+                <li class="related-item"><span class="related-tag">Research</span>Justice in the Ancient World: From Homer to Plato</li>
+                <li class="related-item"><span class="related-tag">Resource</span>Key Terms and Concepts in Platonic Philosophy</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- ARISTOTLE -->
+        <div class="book-entry reveal">
+          <div class="book-header" onclick="toggleBook(this)">
+            <div class="book-spine"><span class="book-spine-text">Aristotle</span></div>
+            <div class="book-info">
+              <div class="book-subject">Ancient Philosophy · Ethics</div>
+              <div class="book-title">Nicomachean Ethics</div>
+              <div class="book-author">Aristotle — trans. Terence Irwin</div>
+            </div>
+            <div class="book-toggle">▾</div>
+          </div>
+          <div class="book-content">
+            <div>
+              <div class="book-section-title">📄 Study Guides</div>
+              <ul class="guide-list">
+                <li class="guide-item">Book I — Happiness & the Good <span class="guide-coming">Coming Soon</span></li>
+                <li class="guide-item">Books II–IV — Virtue & Character <span class="guide-coming">Coming Soon</span></li>
+                <li class="guide-item">Book X — Contemplation & the Good Life <span class="guide-coming">Coming Soon</span></li>
+              </ul>
+            </div>
+            <div>
+              <div class="book-section-title">✍️ Related Essays & Research</div>
+              <ul class="related-list">
+                <li class="related-item"><span class="related-tag">Essay</span>What Aristotle Meant by Eudaimonia</li>
+                <li class="related-item"><span class="related-tag">Research</span>Virtue Ethics in the Modern World</li>
+                <li class="related-item"><span class="related-tag">Resource</span>Aristotle vs. Plato: A Comparative Guide</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="studyguides-note reveal">
+        New books and study guides added as A. Solon reads and researches. <a href="#contact" style="color:var(--gold); text-decoration:none;">Subscribe</a> to be notified when new guides are published.
+      </div>
+    </div>
+  </section>
+
   <!-- RESOURCES -->
   <section id="resources">
     <div class="section-inner">
       <div class="reveal">
         <div class="section-label">Resources</div>
-        <h2 class="section-title">The Scholar's Library</h2>
+        <h2 class="section-title">Tools & Reading Lists</h2>
         <div class="section-divider"></div>
         <p style="max-width:600px; color:var(--sienna); margin-bottom:2.5rem; font-style:italic;">Curated reading lists, research tools, and guides — everything you need to begin or deepen a life of serious study.</p>
       </div>
@@ -901,8 +1070,8 @@
       <div class="section-divider" style="background:var(--gold-light); margin:0 auto 2rem;"></div>
       <p class="contact-text">Whether you are a student seeking guidance, a researcher interested in collaboration, or an institution exploring educational partnerships — the door is open.</p>
       <div class="contact-links">
-        <a href="mailto:asolonwrites@outlook.com" class="contact-link">
-          <span>✉</span> asolonwrites@outlook.com
+        <a href="/cdn-cgi/l/email-protection#e283918d8e8d8c95908b968791a28d97968e8d8d89cc818d8f" class="contact-link">
+          <span>✉</span> <span class="__cf_email__" data-cfemail="7514061a191a1b02071c011006351a0001191a1a1e5b161a18">[email&#160;protected]</span>
         </a>
         <div class="contact-divider"></div>
         <a href="https://thesolonacademy.org" class="contact-link">
@@ -919,18 +1088,15 @@
     <div class="footer-quote">"The more I learn, the more I realize how much I don't know." — Socrates</div>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Book toggle
+    function toggleBook(header) {
+      const entry = header.parentElement;
+      entry.classList.toggle('open');
+    }
+
     // Scroll reveal
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add('visible'), i * 80);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    reveals.forEach(el => observer.observe(el));
-  </script>
-</body>
-</html>
+        if (entry.isInterse
