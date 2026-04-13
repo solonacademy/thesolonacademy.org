@@ -198,6 +198,38 @@
     .related-tag { display: inline-block; font-family: 'Cormorant SC', Georgia, serif; font-size: 0.65rem; letter-spacing: 0.15em; color: #9A7B2F; background: rgba(154,123,47,0.08); padding: 0.1rem 0.4rem; margin-right: 0.4rem; font-style: normal; }
     .studyguides-note { margin-top: 2.5rem; padding: 1.5rem 2rem; border: 1px dashed #C8B89A; text-align: center; font-style: italic; color: #7A4A2A; font-size: 0.95rem; }
 
+    /* FREE TEXTS */
+    .ft-tab {
+      background: transparent; border: 1px solid #C8B89A; color: #3D2B1F;
+      padding: 0.5rem 1rem; font-family: 'Cormorant SC', Georgia, serif;
+      font-size: 0.75rem; letter-spacing: 0.1em; cursor: pointer; transition: all 0.2s;
+    }
+    .ft-tab:hover { border-color: #9A7B2F; color: #9A7B2F; }
+    .ft-active { background: #3D2B1F !important; color: #F7F2E7 !important; border-color: #3D2B1F !important; }
+    .ft-panel { display: block; }
+    .ft-civ-header {
+      font-family: 'Playfair Display', Georgia, serif; font-size: 1.3rem;
+      font-weight: 700; color: #3D2B1F; margin-bottom: 1rem;
+      padding-bottom: 0.75rem; border-bottom: 2px solid #9A7B2F;
+    }
+    .ft-sub {
+      font-family: 'Cormorant SC', Georgia, serif; font-size: 0.78rem;
+      letter-spacing: 0.25em; color: #9A7B2F; margin-bottom: 1rem;
+      padding-bottom: 0.4rem; border-bottom: 1px solid #C8B89A;
+    }
+    .ft-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+    .ft-card {
+      background: #F7F2E7; border: 1px solid #C8B89A; padding: 1.25rem;
+      text-decoration: none; display: block; transition: border-color 0.2s, transform 0.2s;
+    }
+    .ft-card:hover { border-color: #9A7B2F; transform: translateY(-2px); }
+    .ft-source { font-family: 'Cormorant SC', Georgia, serif; font-size: 0.65rem; letter-spacing: 0.2em; color: #9A7B2F; margin-bottom: 0.3rem; }
+    .ft-title { font-family: 'Playfair Display', Georgia, serif; font-size: 0.95rem; font-weight: 600; color: #3D2B1F; margin-bottom: 0.4rem; line-height: 1.3; }
+    .ft-desc { font-size: 0.82rem; color: #7A4A2A; line-height: 1.5; margin-bottom: 0.75rem; }
+    .ft-link { font-family: 'Cormorant SC', Georgia, serif; font-size: 0.68rem; letter-spacing: 0.12em; color: #9A7B2F; }
+
+    @media (max-width: 600px) { .ft-grid { grid-template-columns: 1fr; } .ft-tab { font-size: 0.68rem; padding: 0.4rem 0.6rem; } }
+
     /* RESOURCES */
     #resources { background: #FAF6EE; }
     .resources-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
@@ -503,179 +535,729 @@
 
   <!-- FREE TEXTS -->
   <section id="freetexts" style="background:#EDE5D0; border-top:1px solid #C8B89A; border-bottom:1px solid #C8B89A;">
-    <div class="section-inner">
+    <div class="section-inner" style="max-width:1100px;">
       <div class="section-label">Free Texts</div>
       <h2 class="section-title">The Public Domain Library</h2>
       <div class="section-divider"></div>
-      <p style="max-width:640px; color:#7A4A2A; margin-bottom:0.75rem; font-style:italic;">Every text below is in the public domain — free to read, download, and share legally. These are the original works of the greatest philosophers in history, available to everyone at no cost.</p>
-      <p style="max-width:640px; color:#9A7B2F; margin-bottom:2.5rem; font-size:0.9rem;">All links open on trusted external sources: Project Gutenberg, Standard Ebooks, and the Internet Archive.</p>
+      <p style="max-width:700px; color:#7A4A2A; margin-bottom:0.75rem; font-style:italic;">Every text below is in the public domain — free to read, download, and share legally. From Sumerian clay tablets to the sacred scriptures of every major civilization, this library belongs to everyone.</p>
+      <p style="max-width:700px; color:#9A7B2F; margin-bottom:1.5rem; font-size:0.9rem;">All links open on trusted external sources: Project Gutenberg, Internet Archive, Sacred Texts Archive, and ETCSL Oxford.</p>
 
-      <!-- ANCIENT -->
-      <div style="margin-bottom:2.5rem;">
-        <div style="font-family:'Cormorant SC',Georgia,serif; font-size:0.78rem; letter-spacing:0.25em; color:#9A7B2F; margin-bottom:1rem; padding-bottom:0.5rem; border-bottom:2px solid #9A7B2F;">🏛️ Ancient Philosophy</div>
-        <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1rem;">
+      <!-- TAB NAVIGATION -->
+      <div id="ft-tabs" style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:2rem; border-bottom:2px solid #C8B89A; padding-bottom:1rem;">
+        <button onclick="showTab('ft-ancient')" class="ft-tab ft-active">🏺 Ancient Texts</button>
+        <button onclick="showTab('ft-sacred')" class="ft-tab">✝️ Sacred &amp; Religious Texts</button>
+        <button onclick="showTab('ft-egypt')" class="ft-tab">𓂀 Ancient Egypt</button>
+        <button onclick="showTab('ft-meso')" class="ft-tab">🌙 Mesopotamia</button>
+        <button onclick="showTab('ft-greece')" class="ft-tab">🏛️ Ancient Greece</button>
+        <button onclick="showTab('ft-rome')" class="ft-tab">⚔️ Ancient Rome</button>
+        <button onclick="showTab('ft-china')" class="ft-tab">🐉 Ancient China</button>
+        <button onclick="showTab('ft-india')" class="ft-tab">🕉️ Ancient India</button>
+        <button onclick="showTab('ft-philosophy')" class="ft-tab">📖 Philosophy</button>
+      </div>
 
-          <a href="https://www.gutenberg.org/ebooks/1497" target="_blank" style="text-decoration:none;">
-            <div style="background:#F7F2E7; border:1px solid #C8B89A; padding:1.25rem; transition:border-color 0.2s;" onmouseover="this.style.borderColor='#9A7B2F'" onmouseout="this.style.borderColor='#C8B89A'">
-              <div style="font-family:'Cormorant SC',Georgia,serif; font-size:0.68rem; letter-spacing:0.2em; color:#9A7B2F; margin-bottom:0.3rem;">Plato · Project Gutenberg</div>
-              <div style="font-family:'Playfair Display',Georgia,serif; font-size:1rem; font-weight:600; color:#3D2B1F; margin-bottom:0.3rem;">The Republic</div>
-              <div style="font-size:0.85rem; color:#7A4A2A; font-style:italic;">trans. Benjamin Jowett</div>
-              <div style="margin-top:0.75rem; font-family:'Cormorant SC',Georgia,serif; font-size:0.68rem; letter-spacing:0.12em; color:#9A7B2F;">Read Free →</div>
-            </div>
+      <!-- ANCIENT TEXTS TAB -->
+      <div id="ft-ancient" class="ft-panel">
+        <div class="ft-civ-header">🏺 Ancient Texts — The Earliest Written Records</div>
+        <p style="color:#7A4A2A; font-style:italic; margin-bottom:1.5rem; font-size:0.95rem;">The oldest written texts in human history — from Sumerian clay tablets to the Epic of Gilgamesh. These are the foundations of all human civilization and thought.</p>
+
+        <div class="ft-sub">Sumerian &amp; Akkadian</div>
+        <div class="ft-grid">
+          <a href="https://etcsl.orinst.ox.ac.uk" target="_blank" class="ft-card">
+            <div class="ft-source">ETCSL · Oxford University</div>
+            <div class="ft-title">The Electronic Text Corpus of Sumerian Literature</div>
+            <div class="ft-desc">Complete collection of Sumerian literary texts — hymns, myths, laments, proverbs, and royal inscriptions. Over 400 texts with English translations.</div>
+            <div class="ft-link">Access Free →</div>
           </a>
-
-          <a href="https://www.gutenberg.org/ebooks/1656" target="_blank" style="text-decoration:none;">
-            <div style="background:#F7F2E7; border:1px solid #C8B89A; padding:1.25rem; transition:border-color 0.2s;" onmouseover="this.style.borderColor='#9A7B2F'" onmouseout="this.style.borderColor='#C8B89A'">
-              <div style="font-family:'Cormorant SC',Georgia,serif; font-size:0.68rem; letter-spacing:0.2em; color:#9A7B2F; margin-bottom:0.3rem;">Plato · Project Gutenberg</div>
-              <div style="font-family:'Playfair Display',Georgia,serif; font-size:1rem; font-weight:600; color:#3D2B1F; margin-bottom:0.3rem;">The Apology, Crito &amp; Phaedo</div>
-              <div style="font-size:0.85rem; color:#7A4A2A; font-style:italic;">trans. Benjamin Jowett</div>
-              <div style="margin-top:0.75rem; font-family:'Cormorant SC',Georgia,serif; font-size:0.68rem; letter-spacing:0.12em; color:#9A7B2F;">Read Free →</div>
-            </div>
+          <a href="https://www.gutenberg.org/ebooks/11000" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. R.C. Thompson</div>
+            <div class="ft-title">The Epic of Gilgamesh</div>
+            <div class="ft-desc">The world's oldest surviving work of literature. The story of Gilgamesh, king of Uruk — friendship, loss, the search for immortality. Written c. 2100 BCE.</div>
+            <div class="ft-link">Read Free →</div>
           </a>
-
-          <a href="https://www.gutenberg.org/ebooks/8438" target="_blank" style="text-decoration:none;">
-            <div style="background:#F7F2E7; border:1px solid #C8B89A; padding:1.25rem; transition:border-color 0.2s;" onmouseover="this.style.borderColor='#9A7B2F'" onmouseout="this.style.borderColor='#C8B89A'">
-              <div style="font-family:'Cormorant SC',Georgia,serif; font-size:0.68rem; letter-spacing:0.2em; color:#9A7B2F; margin-bottom:0.3rem;">Aristotle · Project Gutenberg</div>
-              <div style="font-family:'Playfair Display',Georgia,serif; font-size:1rem; font-weight:600; color:#3D2B1F; margin-bottom:0.3rem;">Nicomachean Ethics</div>
-              <div style="font-size:0.85rem; color:#7A4A2A; font-style:italic;">trans. F.H. Peters</div>
-              <div style="margin-top:0.75rem; font-family:'Cormorant SC',Georgia,serif; font-size:0.68rem; letter-spacing:0.12em; color:#9A7B2F;">Read Free →</div>
-            </div>
+          <a href="https://archive.org/details/babylonianlegend00king" target="_blank" class="ft-card">
+            <div class="ft-source">Internet Archive · L.W. King</div>
+            <div class="ft-title">Babylonian Religion and Mythology</div>
+            <div class="ft-desc">L.W. King's comprehensive study of Babylonian religious texts including the Enuma Elish (Babylonian creation myth) with full translations.</div>
+            <div class="ft-link">Read Free →</div>
           </a>
-
-          <a href="https://www.gutenberg.org/ebooks/2680" target="_blank" style="text-decoration:none;">
-            <div style="background:#F7F2E7; border:1px solid #C8B89A; padding:1.25rem; transition:border-color 0.2s;" onmouseover="this.style.borderColor='#9A7B2F'" onmouseout="this.style.borderColor='#C8B89A'">
-              <div style="font-family:'Cormorant SC',Georgia,serif; font-size:0.68rem; letter-spacing:0.2em; color:#9A7B2F; margin-bottom:0.3rem;">Marcus Aurelius · Project Gutenberg</div>
-              <div style="font-family:'Playfair Display',Georgia,serif; font-size:1rem; font-weight:600; color:#3D2B1F; margin-bottom:0.3rem;">Meditations</div>
-              <div style="font-size:0.85rem; color:#7A4A2A; font-style:italic;">trans. George Long</div>
-              <div style="margin-top:0.75rem; font-family:'Cormorant SC',Georgia,serif; font-size:0.68rem; letter-spacing:0.12em; color:#9A7B2F;">Read Free →</div>
-            </div>
+          <a href="https://www.sacred-texts.com/ane/enuma.htm" target="_blank" class="ft-card">
+            <div class="ft-source">Sacred Texts Archive</div>
+            <div class="ft-title">Enuma Elish — The Babylonian Creation Epic</div>
+            <div class="ft-desc">The Babylonian creation myth written on seven clay tablets. One of the most important texts for understanding ancient Near Eastern cosmology.</div>
+            <div class="ft-link">Read Free →</div>
           </a>
-
-          <a href="https://www.gutenberg.org/ebooks/45929" target="_blank" style="text-decoration:none;">
-            <div style="background:#F7F2E7; border:1px solid #C8B89A; padding:1.25rem; transition:border-color 0.2s;" onmouseover="this.style.borderColor='#9A7B2F'" onmouseout="this.style.borderColor='#C8B89A'">
-              <div style="font-family:'Cormorant SC',Georgia,serif; font-size:0.68rem; letter-spacing:0.2em; color:#9A7B2F; margin-bottom:0.3rem;">Epictetus · Project Gutenberg</div>
-              <div style="font-family:'Playfair Display',Georgia,serif; font-size:1rem; font-weight:600; color:#3D2B1F; margin-bottom:0.3rem;">The Enchiridion</div>
-              <div style="font-size:0.85rem; color:#7A4A2A; font-style:italic;">trans. Elizabeth Carter</div>
-              <div style="margin-top:0.75rem; font-family:'Cormorant SC',Georgia,serif; font-size:0.68rem; letter-spacing:0.12em; color:#9A7B2F;">Read Free →</div>
-            </div>
+          <a href="https://www.sacred-texts.com/ane/adb.htm" target="_blank" class="ft-card">
+            <div class="ft-source">Sacred Texts Archive</div>
+            <div class="ft-title">Assyrian &amp; Babylonian Literature</div>
+            <div class="ft-desc">Collection of Assyrian and Babylonian literary texts including hymns, prayers, omens, and royal inscriptions from ancient Mesopotamia.</div>
+            <div class="ft-link">Read Free →</div>
           </a>
-
-          <a href="https://www.gutenberg.org/ebooks/49578" target="_blank" style="text-decoration:none;">
-            <div style="background:#F7F2E7; border:1px solid #C8B89A; padding:1.25rem; transition:border-color 0.2s;" onmouseover="this.style.borderColor='#9A7B2F'" onmouseout="this.style.borderColor='#C8B89A'">
-              <div style="font-family:'Cormorant SC',Georgia,serif; font-size:0.68rem; letter-spacing:0.2em; color:#9A7B2F; margin-bottom:0.3rem;">Plato · Project Gutenberg</div>
-              <div style="font-family:'Playfair Display',Georgia,serif; font-size:1rem; font-weight:600; color:#3D2B1F; margin-bottom:0.3rem;">Meno</div>
-              <div style="font-size:0.85rem; color:#7A4A2A; font-style:italic;">trans. Benjamin Jowett</div>
-              <div style="margin-top:0.75rem; font-family:'Cormorant SC',Georgia,serif; font-size:0.68rem; letter-spacing:0.12em; color:#9A7B2F;">Read Free →</div>
-            </div>
+          <a href="https://www.sacred-texts.com/ane/sum/index.htm" target="_blank" class="ft-card">
+            <div class="ft-source">Sacred Texts Archive</div>
+            <div class="ft-title">Sumerian Mythology</div>
+            <div class="ft-desc">Samuel Noah Kramer's landmark work on Sumerian mythology — the myths of creation, the flood, the descent of Inanna, and more.</div>
+            <div class="ft-link">Read Free →</div>
           </a>
-
         </div>
       </div>
 
-      <!-- EARLY MODERN -->
-      <div style="margin-bottom:2.5rem;">
-        <div style="font-family:'Cormorant SC',Georgia,serif; font-size:0.78rem; letter-spacing:0.25em; color:#9A7B2F; margin-bottom:1rem; padding-bottom:0.5rem; border-bottom:2px solid #9A7B2F;">⚗️ Early Modern Philosophy</div>
-        <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1rem;">
+      <!-- SACRED TEXTS TAB -->
+      <div id="ft-sacred" class="ft-panel" style="display:none;">
+        <div class="ft-civ-header">✝️ Sacred &amp; Religious Texts of the World</div>
+        <p style="color:#7A4A2A; font-style:italic; margin-bottom:1.5rem; font-size:0.95rem;">The foundational sacred texts of every major religious and spiritual tradition — presented here for scholarly study, comparative religion, and philosophical inquiry.</p>
 
-          <a href="https://www.gutenberg.org/ebooks/59" target="_blank" style="text-decoration:none;">
-            <div style="background:#F7F2E7; border:1px solid #C8B89A; padding:1.25rem;" onmouseover="this.style.borderColor='#9A7B2F'" onmouseout="this.style.borderColor='#C8B89A'">
-              <div style="font-family:'Cormorant SC',Georgia,serif; font-size:0.68rem; letter-spacing:0.2em; color:#9A7B2F; margin-bottom:0.3rem;">Descartes · Project Gutenberg</div>
-              <div style="font-family:'Playfair Display',Georgia,serif; font-size:1rem; font-weight:600; color:#3D2B1F; margin-bottom:0.3rem;">Meditations on First Philosophy</div>
-              <div style="font-size:0.85rem; color:#7A4A2A; font-style:italic;">trans. John Veitch</div>
-              <div style="margin-top:0.75rem; font-family:'Cormorant SC',Georgia,serif; font-size:0.68rem; letter-spacing:0.12em; color:#9A7B2F;">Read Free →</div>
-            </div>
+        <div class="ft-sub">Abrahamic Traditions</div>
+        <div class="ft-grid">
+          <a href="https://www.gutenberg.org/ebooks/10" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · King James Version</div>
+            <div class="ft-title">The Holy Bible — Complete (KJV)</div>
+            <div class="ft-desc">The complete King James Bible including the Old Testament, New Testament, and Apocrypha. The most influential book in the English language.</div>
+            <div class="ft-link">Read Free →</div>
           </a>
-
-          <a href="https://www.gutenberg.org/ebooks/9662" target="_blank" style="text-decoration:none;">
-            <div style="background:#F7F2E7; border:1px solid #C8B89A; padding:1.25rem;" onmouseover="this.style.borderColor='#9A7B2F'" onmouseout="this.style.borderColor='#C8B89A'">
-              <div style="font-family:'Cormorant SC',Georgia,serif; font-size:0.68rem; letter-spacing:0.2em; color:#9A7B2F; margin-bottom:0.3rem;">Hume · Project Gutenberg</div>
-              <div style="font-family:'Playfair Display',Georgia,serif; font-size:1rem; font-weight:600; color:#3D2B1F; margin-bottom:0.3rem;">An Enquiry Concerning Human Understanding</div>
-              <div style="font-size:0.85rem; color:#7A4A2A; font-style:italic;">David Hume</div>
-              <div style="margin-top:0.75rem; font-family:'Cormorant SC',Georgia,serif; font-size:0.68rem; letter-spacing:0.12em; color:#9A7B2F;">Read Free →</div>
-            </div>
+          <a href="https://www.gutenberg.org/ebooks/8001" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · King James Version</div>
+            <div class="ft-title">The Old Testament (Hebrew Bible)</div>
+            <div class="ft-desc">The complete Old Testament — Genesis through Malachi. The foundation of Judaism and Christianity, containing Torah, Prophets, and Writings.</div>
+            <div class="ft-link">Read Free →</div>
           </a>
-
-          <a href="https://www.gutenberg.org/ebooks/4705" target="_blank" style="text-decoration:none;">
-            <div style="background:#F7F2E7; border:1px solid #C8B89A; padding:1.25rem;" onmouseover="this.style.borderColor='#9A7B2F'" onmouseout="this.style.borderColor='#C8B89A'">
-              <div style="font-family:'Cormorant SC',Georgia,serif; font-size:0.68rem; letter-spacing:0.2em; color:#9A7B2F; margin-bottom:0.3rem;">Locke · Project Gutenberg</div>
-              <div style="font-family:'Playfair Display',Georgia,serif; font-size:1rem; font-weight:600; color:#3D2B1F; margin-bottom:0.3rem;">Second Treatise of Government</div>
-              <div style="font-size:0.85rem; color:#7A4A2A; font-style:italic;">John Locke</div>
-              <div style="margin-top:0.75rem; font-family:'Cormorant SC',Georgia,serif; font-size:0.68rem; letter-spacing:0.12em; color:#9A7B2F;">Read Free →</div>
-            </div>
+          <a href="https://www.gutenberg.org/ebooks/8380" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · King James Version</div>
+            <div class="ft-title">The New Testament</div>
+            <div class="ft-desc">The complete New Testament — the four Gospels, Acts of the Apostles, the Epistles, and Revelation. The foundational text of Christianity.</div>
+            <div class="ft-link">Read Free →</div>
           </a>
-
-          <a href="https://www.gutenberg.org/ebooks/46333" target="_blank" style="text-decoration:none;">
-            <div style="background:#F7F2E7; border:1px solid #C8B89A; padding:1.25rem;" onmouseover="this.style.borderColor='#9A7B2F'" onmouseout="this.style.borderColor='#C8B89A'">
-              <div style="font-family:'Cormorant SC',Georgia,serif; font-size:0.68rem; letter-spacing:0.2em; color:#9A7B2F; margin-bottom:0.3rem;">Kant · Project Gutenberg</div>
-              <div style="font-family:'Playfair Display',Georgia,serif; font-size:1rem; font-weight:600; color:#3D2B1F; margin-bottom:0.3rem;">Groundwork of the Metaphysics of Morals</div>
-              <div style="font-size:0.85rem; color:#7A4A2A; font-style:italic;">Immanuel Kant</div>
-              <div style="margin-top:0.75rem; font-family:'Cormorant SC',Georgia,serif; font-size:0.68rem; letter-spacing:0.12em; color:#9A7B2F;">Read Free →</div>
-            </div>
+          <a href="https://www.sacred-texts.com/bib/poly/index.htm" target="_blank" class="ft-card">
+            <div class="ft-source">Sacred Texts Archive</div>
+            <div class="ft-title">The Torah (Five Books of Moses)</div>
+            <div class="ft-desc">Genesis, Exodus, Leviticus, Numbers, and Deuteronomy — the Torah in English translation. The foundational sacred text of Judaism.</div>
+            <div class="ft-link">Read Free →</div>
           </a>
-
-          <a href="https://www.gutenberg.org/ebooks/30" target="_blank" style="text-decoration:none;">
-            <div style="background:#F7F2E7; border:1px solid #C8B89A; padding:1.25rem;" onmouseover="this.style.borderColor='#9A7B2F'" onmouseout="this.style.borderColor='#C8B89A'">
-              <div style="font-family:'Cormorant SC',Georgia,serif; font-size:0.68rem; letter-spacing:0.2em; color:#9A7B2F; margin-bottom:0.3rem;">Mill · Project Gutenberg</div>
-              <div style="font-family:'Playfair Display',Georgia,serif; font-size:1rem; font-weight:600; color:#3D2B1F; margin-bottom:0.3rem;">On Liberty</div>
-              <div style="font-size:0.85rem; color:#7A4A2A; font-style:italic;">John Stuart Mill</div>
-              <div style="margin-top:0.75rem; font-family:'Cormorant SC',Georgia,serif; font-size:0.68rem; letter-spacing:0.12em; color:#9A7B2F;">Read Free →</div>
-            </div>
+          <a href="https://www.gutenberg.org/ebooks/2800" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. E.H. Palmer</div>
+            <div class="ft-title">The Psalms</div>
+            <div class="ft-desc">The complete Book of Psalms — 150 sacred poems and hymns attributed to King David. Among the most read and memorized texts in history.</div>
+            <div class="ft-link">Read Free →</div>
           </a>
-
-          <a href="https://www.gutenberg.org/ebooks/11224" target="_blank" style="text-decoration:none;">
-            <div style="background:#F7F2E7; border:1px solid #C8B89A; padding:1.25rem;" onmouseover="this.style.borderColor='#9A7B2F'" onmouseout="this.style.borderColor='#C8B89A'">
-              <div style="font-family:'Cormorant SC',Georgia,serif; font-size:0.68rem; letter-spacing:0.2em; color:#9A7B2F; margin-bottom:0.3rem;">Mill · Project Gutenberg</div>
-              <div style="font-family:'Playfair Display',Georgia,serif; font-size:1rem; font-weight:600; color:#3D2B1F; margin-bottom:0.3rem;">Utilitarianism</div>
-              <div style="font-size:0.85rem; color:#7A4A2A; font-style:italic;">John Stuart Mill</div>
-              <div style="margin-top:0.75rem; font-family:'Cormorant SC',Georgia,serif; font-size:0.68rem; letter-spacing:0.12em; color:#9A7B2F;">Read Free →</div>
-            </div>
+          <a href="https://www.gutenberg.org/ebooks/7440" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. J.M. Rodwell</div>
+            <div class="ft-title">The Quran (Al-Qur'an)</div>
+            <div class="ft-desc">The complete Quran in English translation — the sacred scripture of Islam, revealed to the Prophet Muhammad. One of the most read books in human history.</div>
+            <div class="ft-link">Read Free →</div>
           </a>
+          <a href="https://www.sacred-texts.com/isl/quran/index.htm" target="_blank" class="ft-card">
+            <div class="ft-source">Sacred Texts · trans. M.H. Shakir</div>
+            <div class="ft-title">The Quran — Alternative Translation</div>
+            <div class="ft-desc">M.H. Shakir's widely used English translation of the Quran with full text and searchable index.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.sacred-texts.com/jud/talmud/index.htm" target="_blank" class="ft-card">
+            <div class="ft-source">Sacred Texts Archive</div>
+            <div class="ft-title">The Talmud (Selections)</div>
+            <div class="ft-desc">Selected tractates from the Babylonian Talmud in English translation — the central text of Rabbinic Judaism containing law, ethics, and philosophy.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/1700" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg</div>
+            <div class="ft-title">The Book of Enoch</div>
+            <div class="ft-desc">The ancient Jewish apocalyptic text attributed to Enoch — influential on both Jewish and early Christian thought. Essential for understanding Second Temple Judaism.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.sacred-texts.com/chr/apo/index.htm" target="_blank" class="ft-card">
+            <div class="ft-source">Sacred Texts Archive</div>
+            <div class="ft-title">The Biblical Apocrypha</div>
+            <div class="ft-desc">The deuterocanonical books including Tobit, Judith, Maccabees, Wisdom of Solomon, and Sirach — accepted by Catholic and Orthodox traditions.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+        </div>
 
+        <div class="ft-sub" style="margin-top:2rem;">Hindu &amp; Vedic Tradition</div>
+        <div class="ft-grid">
+          <a href="https://www.sacred-texts.com/hin/rigveda/index.htm" target="_blank" class="ft-card">
+            <div class="ft-source">Sacred Texts · trans. Ralph T.H. Griffith</div>
+            <div class="ft-title">The Rig Veda</div>
+            <div class="ft-desc">The oldest of the four Vedas — a collection of 1,028 hymns composed c. 1500–1200 BCE. The oldest surviving Indo-European text and foundation of Hinduism.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.sacred-texts.com/hin/av/index.htm" target="_blank" class="ft-card">
+            <div class="ft-source">Sacred Texts · trans. Maurice Bloomfield</div>
+            <div class="ft-title">The Atharva Veda</div>
+            <div class="ft-desc">The fourth Veda — hymns, philosophical speculation, and practical formulas. Contains some of the oldest known philosophical speculation on the nature of time.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/2388" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. Edwin Arnold</div>
+            <div class="ft-title">The Bhagavad Gita</div>
+            <div class="ft-desc">The divine song — Krishna's discourse to Arjuna on duty, righteousness, and the nature of the soul. One of the most studied philosophical texts in the world.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.sacred-texts.com/hin/upan/index.htm" target="_blank" class="ft-card">
+            <div class="ft-source">Sacred Texts · trans. Max Müller</div>
+            <div class="ft-title">The Upanishads (Principal)</div>
+            <div class="ft-desc">The philosophical core of Hinduism — the Brihadaranyaka, Chandogya, Kena, Katha, and other major Upanishads exploring Brahman, Atman, and liberation.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.sacred-texts.com/hin/manu.htm" target="_blank" class="ft-card">
+            <div class="ft-source">Sacred Texts · trans. G. Bühler</div>
+            <div class="ft-title">The Laws of Manu (Manusmriti)</div>
+            <div class="ft-desc">The ancient Hindu legal text addressing dharma, social conduct, and cosmic order. An essential primary source for understanding ancient Indian society.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+        </div>
+
+        <div class="ft-sub" style="margin-top:2rem;">Buddhist Tradition</div>
+        <div class="ft-grid">
+          <a href="https://www.gutenberg.org/ebooks/2017" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. F. Max Müller</div>
+            <div class="ft-title">The Dhammapada</div>
+            <div class="ft-desc">423 verses attributed to the Buddha — one of the most beloved texts of Theravada Buddhism covering ethics, mind, and the path to liberation.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.sacred-texts.com/bud/index.htm" target="_blank" class="ft-card">
+            <div class="ft-source">Sacred Texts Archive</div>
+            <div class="ft-title">Buddhist Scriptures — Full Collection</div>
+            <div class="ft-desc">Comprehensive collection of Buddhist texts including Pali Canon selections, Mahayana sutras, Zen texts, and Tibetan Buddhist literature.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/12894" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. F.L. Woodward</div>
+            <div class="ft-title">Some Sayings of the Buddha</div>
+            <div class="ft-desc">Selected teachings from the Pali Canon — the direct teachings of Siddhartha Gautama on suffering, impermanence, and the Noble Eightfold Path.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+        </div>
+
+        <div class="ft-sub" style="margin-top:2rem;">Other Sacred Traditions</div>
+        <div class="ft-grid">
+          <a href="https://www.gutenberg.org/ebooks/216" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. James Legge</div>
+            <div class="ft-title">Tao Te Ching</div>
+            <div class="ft-desc">The foundational text of Taoism attributed to Laozi — 81 short chapters on the nature of the Tao (the Way), virtue, and effortless action.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.sacred-texts.com/zor/index.htm" target="_blank" class="ft-card">
+            <div class="ft-source">Sacred Texts Archive</div>
+            <div class="ft-title">The Avesta — Zoroastrian Scriptures</div>
+            <div class="ft-desc">The sacred texts of Zoroastrianism including the Gathas (hymns of Zarathustra) — one of the world's oldest monotheistic religious traditions.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.sacred-texts.com/egy/index.htm" target="_blank" class="ft-card">
+            <div class="ft-source">Sacred Texts Archive</div>
+            <div class="ft-title">The Egyptian Book of the Dead</div>
+            <div class="ft-desc">E.A. Wallis Budge's translation of the ancient Egyptian funerary texts — spells, hymns, and instructions for navigating the afterlife. c. 1550 BCE.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.sacred-texts.com/ame/index.htm" target="_blank" class="ft-card">
+            <div class="ft-source">Sacred Texts Archive</div>
+            <div class="ft-title">The Popol Vuh — Mayan Sacred Text</div>
+            <div class="ft-desc">The creation myth and sacred history of the K'iche' Maya — one of the few surviving pre-Columbian texts offering insight into Mesoamerican cosmology.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/7000" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg</div>
+            <div class="ft-title">The Book of Mormon</div>
+            <div class="ft-desc">The sacred scripture of the Latter-day Saints movement. Included here as a significant 19th century religious text with wide cultural influence.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.sacred-texts.com/jai/index.htm" target="_blank" class="ft-card">
+            <div class="ft-source">Sacred Texts Archive</div>
+            <div class="ft-title">Jain Scriptures — Selections</div>
+            <div class="ft-desc">Selected texts from the Jain tradition including the Acaranga Sutra and teachings of Mahavira — foundational texts of one of the world's oldest religions.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
         </div>
       </div>
 
-      <!-- NIETZSCHE & 19TH CENTURY -->
-      <div style="margin-bottom:2.5rem;">
-        <div style="font-family:'Cormorant SC',Georgia,serif; font-size:0.78rem; letter-spacing:0.25em; color:#9A7B2F; margin-bottom:1rem; padding-bottom:0.5rem; border-bottom:2px solid #9A7B2F;">📜 19th Century Philosophy</div>
-        <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1rem;">
+      <!-- ANCIENT EGYPT TAB -->
+      <div id="ft-egypt" class="ft-panel" style="display:none;">
+        <div class="ft-civ-header">𓂀 Ancient Egypt</div>
+        <p style="color:#7A4A2A; font-style:italic; margin-bottom:1.5rem; font-size:0.95rem;">Free scholarly works on ancient Egyptian civilization — including the landmark books of Sir William Matthew Flinders Petrie and E.A. Wallis Budge.</p>
 
-          <a href="https://www.gutenberg.org/ebooks/52190" target="_blank" style="text-decoration:none;">
-            <div style="background:#F7F2E7; border:1px solid #C8B89A; padding:1.25rem;" onmouseover="this.style.borderColor='#9A7B2F'" onmouseout="this.style.borderColor='#C8B89A'">
-              <div style="font-family:'Cormorant SC',Georgia,serif; font-size:0.68rem; letter-spacing:0.2em; color:#9A7B2F; margin-bottom:0.3rem;">Nietzsche · Project Gutenberg</div>
-              <div style="font-family:'Playfair Display',Georgia,serif; font-size:1rem; font-weight:600; color:#3D2B1F; margin-bottom:0.3rem;">Beyond Good and Evil</div>
-              <div style="font-size:0.85rem; color:#7A4A2A; font-style:italic;">Friedrich Nietzsche</div>
-              <div style="margin-top:0.75rem; font-family:'Cormorant SC',Georgia,serif; font-size:0.68rem; letter-spacing:0.12em; color:#9A7B2F;">Read Free →</div>
-            </div>
+        <div class="ft-sub">Flinders Petrie — The Father of Modern Egyptology</div>
+        <div class="ft-grid">
+          <a href="https://archive.org/details/historicalstudi00petrgoog" target="_blank" class="ft-card">
+            <div class="ft-source">Internet Archive · Flinders Petrie</div>
+            <div class="ft-title">Historical Studies</div>
+            <div class="ft-desc">Petrie's historical analysis of ancient Egyptian civilization — one of his foundational scholarly works establishing modern Egyptological method.</div>
+            <div class="ft-link">Read Free →</div>
           </a>
-
-          <a href="https://www.gutenberg.org/ebooks/1998" target="_blank" style="text-decoration:none;">
-            <div style="background:#F7F2E7; border:1px solid #C8B89A; padding:1.25rem;" onmouseover="this.style.borderColor='#9A7B2F'" onmouseout="this.style.borderColor='#C8B89A'">
-              <div style="font-family:'Cormorant SC',Georgia,serif; font-size:0.68rem; letter-spacing:0.2em; color:#9A7B2F; margin-bottom:0.3rem;">Nietzsche · Project Gutenberg</div>
-              <div style="font-family:'Playfair Display',Georgia,serif; font-size:1rem; font-weight:600; color:#3D2B1F; margin-bottom:0.3rem;">Thus Spoke Zarathustra</div>
-              <div style="font-size:0.85rem; color:#7A4A2A; font-style:italic;">Friedrich Nietzsche</div>
-              <div style="margin-top:0.75rem; font-family:'Cormorant SC',Georgia,serif; font-size:0.68rem; letter-spacing:0.12em; color:#9A7B2F;">Read Free →</div>
-            </div>
+          <a href="https://archive.org/details/religionlifeanci00petr" target="_blank" class="ft-card">
+            <div class="ft-source">Internet Archive · Flinders Petrie</div>
+            <div class="ft-title">Religion and Life in Ancient Egypt</div>
+            <div class="ft-desc">Petrie's comprehensive study of religious practices, beliefs, and daily life in ancient Egypt based on his decades of archaeological excavation.</div>
+            <div class="ft-link">Read Free →</div>
           </a>
-
-          <a href="https://www.gutenberg.org/ebooks/5827" target="_blank" style="text-decoration:none;">
-            <div style="background:#F7F2E7; border:1px solid #C8B89A; padding:1.25rem;" onmouseover="this.style.borderColor='#9A7B2F'" onmouseout="this.style.borderColor='#C8B89A'">
-              <div style="font-family:'Cormorant SC',Georgia,serif; font-size:0.68rem; letter-spacing:0.2em; color:#9A7B2F; margin-bottom:0.3rem;">Rousseau · Project Gutenberg</div>
-              <div style="font-family:'Playfair Display',Georgia,serif; font-size:1rem; font-weight:600; color:#3D2B1F; margin-bottom:0.3rem;">The Social Contract</div>
-              <div style="font-size:0.85rem; color:#7A4A2A; font-style:italic;">Jean-Jacques Rousseau</div>
-              <div style="margin-top:0.75rem; font-family:'Cormorant SC',Georgia,serif; font-size:0.68rem; letter-spacing:0.12em; color:#9A7B2F;">Read Free →</div>
-            </div>
+          <a href="https://archive.org/details/sociallifeinage00petrgoog" target="_blank" class="ft-card">
+            <div class="ft-source">Internet Archive · Flinders Petrie</div>
+            <div class="ft-title">Social Life in Ancient Egypt</div>
+            <div class="ft-desc">A detailed study of daily life, social structures, crafts, and customs in ancient Egypt from the archaeological evidence.</div>
+            <div class="ft-link">Read Free →</div>
           </a>
+          <a href="https://archive.org/details/egyptandisrael00petruoft" target="_blank" class="ft-card">
+            <div class="ft-source">Internet Archive · Flinders Petrie</div>
+            <div class="ft-title">Egypt and Israel</div>
+            <div class="ft-desc">Petrie's examination of the historical relationship between ancient Egypt and ancient Israel — connecting archaeology and biblical history.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://archive.org/details/artsinancientegy00petr" target="_blank" class="ft-card">
+            <div class="ft-source">Internet Archive · Flinders Petrie</div>
+            <div class="ft-title">The Arts and Crafts of Ancient Egypt</div>
+            <div class="ft-desc">Petrie's survey of Egyptian artistic production and craftsmanship across all periods — illustrated with drawings and photographs.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+        </div>
 
+        <div class="ft-sub" style="margin-top:2rem;">E.A. Wallis Budge — Essential Egyptology</div>
+        <div class="ft-grid">
+          <a href="https://www.gutenberg.org/ebooks/7145" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · E.A. Wallis Budge</div>
+            <div class="ft-title">The Egyptian Book of the Dead</div>
+            <div class="ft-desc">Budge's landmark translation of the Papyrus of Ani — the most complete surviving version of the ancient Egyptian funerary texts with hieroglyphic text and commentary.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/9506" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · E.A. Wallis Budge</div>
+            <div class="ft-title">The Gods of the Egyptians (2 Vols.)</div>
+            <div class="ft-desc">The most comprehensive study of the Egyptian pantheon ever written — covering every major deity, their mythology, iconography, and worship.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/9168" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · E.A. Wallis Budge</div>
+            <div class="ft-title">Osiris and the Egyptian Resurrection</div>
+            <div class="ft-desc">Budge's study of the Osiris myth and its central role in Egyptian religion — the death and resurrection cycle that shaped Egyptian civilization for millennia.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/9160" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · E.A. Wallis Budge</div>
+            <div class="ft-title">Egyptian Magic</div>
+            <div class="ft-desc">A detailed study of magic in ancient Egypt — amulets, spells, magical papyri, and the relationship between magic and religion in ancient Egyptian thought.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/9779" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · E.A. Wallis Budge</div>
+            <div class="ft-title">A History of Egypt (8 Vols.)</div>
+            <div class="ft-desc">Budge's comprehensive multi-volume history of ancient Egypt from the earliest times through the Ptolemaic period.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+        </div>
+
+        <div class="ft-sub" style="margin-top:2rem;">Primary Texts &amp; Inscriptions</div>
+        <div class="ft-grid">
+          <a href="https://www.sacred-texts.com/egy/index.htm" target="_blank" class="ft-card">
+            <div class="ft-source">Sacred Texts Archive</div>
+            <div class="ft-title">Ancient Egyptian Sacred Texts — Full Collection</div>
+            <div class="ft-desc">Comprehensive collection including the Pyramid Texts, Coffin Texts, Book of the Dead, Hymn to the Nile, Hymn to Aten, and other primary sources.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://archive.org/details/recordsofthepast00budguoft" target="_blank" class="ft-card">
+            <div class="ft-source">Internet Archive</div>
+            <div class="ft-title">Records of the Past — Egyptian &amp; Assyrian Monuments</div>
+            <div class="ft-desc">Translations of ancient Egyptian and Assyrian inscriptions, texts, and monuments — primary source documents for the ancient Near East.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/17324" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · Herodotus</div>
+            <div class="ft-title">The Histories — Book II: Egypt</div>
+            <div class="ft-desc">Herodotus's account of ancient Egypt — the oldest extended Greek description of Egyptian civilization, customs, geography, and religion.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
         </div>
       </div>
 
-      <!-- EXTERNAL SOURCES -->
-      <div style="background:#F7F2E7; border:1px solid #C8B89A; padding:1.75rem; margin-top:1rem;">
-        <div style="font-family:'Cormorant SC',Georgia,serif; font-size:0.78rem; letter-spacing:0.2em; color:#9A7B2F; margin-bottom:1rem;">📚 Trusted Free Philosophy Sources</div>
+      <!-- MESOPOTAMIA TAB -->
+      <div id="ft-meso" class="ft-panel" style="display:none;">
+        <div class="ft-civ-header">🌙 Ancient Mesopotamia — Sumer, Akkad, Babylon &amp; Assyria</div>
+        <p style="color:#7A4A2A; font-style:italic; margin-bottom:1.5rem; font-size:0.95rem;">The civilization that invented writing, law, astronomy, and urban life. Free texts from ancient Sumer, Akkad, Babylon, and Assyria.</p>
+
+        <div class="ft-grid">
+          <a href="https://etcsl.orinst.ox.ac.uk" target="_blank" class="ft-card">
+            <div class="ft-source">ETCSL · Oxford University</div>
+            <div class="ft-title">Electronic Text Corpus of Sumerian Literature</div>
+            <div class="ft-desc">The complete online corpus of Sumerian literary texts with English translations — the definitive scholarly resource for Sumerian literature.</div>
+            <div class="ft-link">Access Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/11000" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg</div>
+            <div class="ft-title">The Epic of Gilgamesh</div>
+            <div class="ft-desc">The world's oldest great work of literature — the story of Gilgamesh, king of Uruk, his friendship with Enkidu, and his quest for immortality. c. 2100 BCE.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.sacred-texts.com/ane/enuma.htm" target="_blank" class="ft-card">
+            <div class="ft-source">Sacred Texts Archive</div>
+            <div class="ft-title">Enuma Elish — Babylonian Creation Epic</div>
+            <div class="ft-desc">The Babylonian creation myth — Marduk's battle with Tiamat and the creation of the world from her body. A foundational text for ancient Near Eastern religion.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.sacred-texts.com/ane/ham.htm" target="_blank" class="ft-card">
+            <div class="ft-source">Sacred Texts Archive</div>
+            <div class="ft-title">The Code of Hammurabi</div>
+            <div class="ft-desc">One of the oldest written legal codes in history — 282 laws of King Hammurabi of Babylon c. 1754 BCE. Essential for understanding ancient law and governance.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://archive.org/details/babylonianlegend00king" target="_blank" class="ft-card">
+            <div class="ft-source">Internet Archive · L.W. King</div>
+            <div class="ft-title">Babylonian Religion and Mythology</div>
+            <div class="ft-desc">Comprehensive translations and analysis of Babylonian religious texts, myths, and hymns including the Descent of Ishtar.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://archive.org/details/cu31924012338669" target="_blank" class="ft-card">
+            <div class="ft-source">Internet Archive · Morris Jastrow</div>
+            <div class="ft-title">The Religion of Babylonia and Assyria</div>
+            <div class="ft-desc">Morris Jastrow's comprehensive scholarly study of Mesopotamian religion — covering gods, temples, rituals, divination, and cosmology.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/16377" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · George Smith</div>
+            <div class="ft-title">The Chaldean Account of Genesis</div>
+            <div class="ft-desc">George Smith's landmark 1876 discovery and translation of the Babylonian flood narrative — predating and paralleling the Biblical account of Noah.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://archive.org/details/sumerianmytholog00kram" target="_blank" class="ft-card">
+            <div class="ft-source">Internet Archive · Samuel Noah Kramer</div>
+            <div class="ft-title">Sumerian Mythology</div>
+            <div class="ft-desc">Kramer's classic study of Sumerian myths — creation, the flood, the underworld, and the gods. The standard introduction to Sumerian religious thought.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- ANCIENT GREECE TAB -->
+      <div id="ft-greece" class="ft-panel" style="display:none;">
+        <div class="ft-civ-header">🏛️ Ancient Greece</div>
+        <p style="color:#7A4A2A; font-style:italic; margin-bottom:1.5rem; font-size:0.95rem;">The free texts of ancient Greek civilization — from Homer's epics to the historians, dramatists, and philosophers who shaped Western thought.</p>
+
+        <div class="ft-sub">Epic Poetry</div>
+        <div class="ft-grid">
+          <a href="https://www.gutenberg.org/ebooks/2199" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. Samuel Butler</div>
+            <div class="ft-title">The Iliad</div>
+            <div class="ft-desc">Homer's epic of the Trojan War — the rage of Achilles, the death of Hector, and the heroic code of ancient Greece. c. 8th century BCE.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/1727" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. Samuel Butler</div>
+            <div class="ft-title">The Odyssey</div>
+            <div class="ft-desc">Odysseus's ten-year journey home from Troy — the foundational text of Western literature exploring identity, homecoming, and the human condition.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/348" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. Hugh Evelyn-White</div>
+            <div class="ft-title">Works and Days &amp; Theogony</div>
+            <div class="ft-desc">Hesiod's two great poems — the Theogony describing the origins of the gods, and Works and Days on justice, labor, and the myth of Pandora.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+        </div>
+
+        <div class="ft-sub" style="margin-top:1.5rem;">History</div>
+        <div class="ft-grid">
+          <a href="https://www.gutenberg.org/ebooks/2707" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. G.C. Macaulay</div>
+            <div class="ft-title">The Histories — Herodotus</div>
+            <div class="ft-desc">The "Father of History" — Herodotus's account of the Persian Wars and his survey of the ancient world's peoples and cultures. c. 440 BCE.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/7142" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. Richard Crawley</div>
+            <div class="ft-title">History of the Peloponnesian War — Thucydides</div>
+            <div class="ft-desc">The most rigorous work of ancient history — Thucydides's account of the war between Athens and Sparta. The Melian Dialogue and Funeral Oration of Pericles are essential reading.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/14033" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. Aubrey Stewart</div>
+            <div class="ft-title">Parallel Lives — Plutarch</div>
+            <div class="ft-desc">Paired biographies of great Greeks and Romans — Solon, Pericles, Alexander, Caesar, and more. Essential for ancient biography and moral philosophy.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+        </div>
+
+        <div class="ft-sub" style="margin-top:1.5rem;">Drama &amp; Poetry</div>
+        <div class="ft-grid">
+          <a href="https://www.gutenberg.org/ebooks/1145" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. E.H. Plumptre</div>
+            <div class="ft-title">The Oresteia — Aeschylus</div>
+            <div class="ft-desc">Agamemnon, The Libation Bearers, and The Eumenides — the only surviving Greek tragic trilogy, exploring justice, revenge, and the founding of Athenian democracy.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/31" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. F. Storr</div>
+            <div class="ft-title">Oedipus Rex &amp; Oedipus at Colonus — Sophocles</div>
+            <div class="ft-desc">The greatest tragedies of Sophocles — the story of Oedipus who unknowingly kills his father and marries his mother. Essential for Greek tragedy and fate.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- ANCIENT ROME TAB -->
+      <div id="ft-rome" class="ft-panel" style="display:none;">
+        <div class="ft-civ-header">⚔️ Ancient Rome</div>
+        <p style="color:#7A4A2A; font-style:italic; margin-bottom:1.5rem; font-size:0.95rem;">The historians, philosophers, and statesmen of Rome — free texts from Caesar, Cicero, Livy, Tacitus, Suetonius, and the Stoic philosophers.</p>
+
+        <div class="ft-grid">
+          <a href="https://www.gutenberg.org/ebooks/10657" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. W.A. McDevitte</div>
+            <div class="ft-title">The Gallic Wars — Julius Caesar</div>
+            <div class="ft-desc">Caesar's own account of his military campaigns in Gaul — a model of Latin prose style and one of the most read works in the history of education.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/2395" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. C.D. Yonge</div>
+            <div class="ft-title">The Orations of Cicero</div>
+            <div class="ft-desc">Cicero's greatest speeches including the Catilinarian Orations and Philippics — models of Roman rhetoric and the art of political persuasion.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/2808" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. C.D. Yonge</div>
+            <div class="ft-title">On the Nature of the Gods — Cicero</div>
+            <div class="ft-desc">Cicero's philosophical dialogue examining Epicurean, Stoic, and Academic views on the nature and existence of the gods. Essential for ancient philosophy of religion.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/2809" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. C.D. Yonge</div>
+            <div class="ft-title">De Officiis (On Duties) — Cicero</div>
+            <div class="ft-desc">Cicero's most influential philosophical work on moral obligation, virtue, and political life. One of the most read books in Western history.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/2680" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. George Long</div>
+            <div class="ft-title">Meditations — Marcus Aurelius</div>
+            <div class="ft-desc">The private philosophical journal of the philosopher-emperor — Stoic reflections on duty, impermanence, and the inner life. One of the most beloved books in history.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/3044" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. John Clarke</div>
+            <div class="ft-title">Letters from a Stoic — Seneca</div>
+            <div class="ft-desc">Seneca's moral letters to Lucilius — philosophical reflections on death, friendship, time, and the good life. Among the finest pieces of philosophical prose.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/1476" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. John Henry Freese</div>
+            <div class="ft-title">The Annals — Tacitus</div>
+            <div class="ft-desc">Tacitus's masterpiece of Roman historiography — the reigns of Tiberius, Claudius, and Nero. Essential for understanding the Roman Empire at its height.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/6400" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. J.C. Rolfe</div>
+            <div class="ft-title">The Twelve Caesars — Suetonius</div>
+            <div class="ft-desc">Biographies of Julius Caesar through Domitian — the most entertaining and scandalous account of the early Roman emperors. Essential primary source.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/19725" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. Cyrus Edmonds</div>
+            <div class="ft-title">The History of Rome — Livy</div>
+            <div class="ft-desc">Livy's monumental history of Rome from its founding — the early republic, the kings, and the growth of Roman power.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/9700" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · Lucretius</div>
+            <div class="ft-title">On the Nature of Things (De Rerum Natura)</div>
+            <div class="ft-desc">Lucretius's Epicurean philosophical poem — atomism, the soul, death, and the nature of the universe. One of the greatest philosophical poems ever written.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- ANCIENT CHINA TAB -->
+      <div id="ft-china" class="ft-panel" style="display:none;">
+        <div class="ft-civ-header">🐉 Ancient China</div>
+        <p style="color:#7A4A2A; font-style:italic; margin-bottom:1.5rem; font-size:0.95rem;">The philosophical and historical classics of ancient China — Confucius, Laozi, Sun Tzu, Mencius, and the great historians of Chinese civilization.</p>
+
+        <div class="ft-grid">
+          <a href="https://www.gutenberg.org/ebooks/4094" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. James Legge</div>
+            <div class="ft-title">The Analects of Confucius</div>
+            <div class="ft-desc">The collected sayings and teachings of Confucius — on virtue, good governance, filial piety, and the cultivation of the superior person. c. 475 BCE.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/216" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. James Legge</div>
+            <div class="ft-title">Tao Te Ching — Laozi</div>
+            <div class="ft-desc">The 81 chapters of the Way and Virtue — the foundational text of Taoism. Among the most translated books in the world after the Bible.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/132" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. Lionel Giles</div>
+            <div class="ft-title">The Art of War — Sun Tzu</div>
+            <div class="ft-desc">The ancient Chinese military treatise on strategy, tactics, and leadership. Written c. 5th century BCE — still studied in military academies and business schools worldwide.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.sacred-texts.com/cfu/menc/index.htm" target="_blank" class="ft-card">
+            <div class="ft-source">Sacred Texts · trans. James Legge</div>
+            <div class="ft-title">The Works of Mencius</div>
+            <div class="ft-desc">Mencius's elaboration of Confucian philosophy — human nature is inherently good, the role of moral cultivation, and the duties of rulers to the people.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.sacred-texts.com/tao/crv/index.htm" target="_blank" class="ft-card">
+            <div class="ft-source">Sacred Texts · trans. James Legge</div>
+            <div class="ft-title">The Writings of Zhuangzi</div>
+            <div class="ft-desc">The second foundational Taoist text — Zhuangzi's parables, stories, and paradoxes on the nature of knowledge, freedom, and the relativity of perspectives.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/15250" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. James Legge</div>
+            <div class="ft-title">The I Ching (Book of Changes)</div>
+            <div class="ft-desc">The ancient Chinese divination text and cosmological system — one of the oldest books in the world, influencing philosophy, literature, and thought for millennia.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/4292" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. James Legge</div>
+            <div class="ft-title">The Book of Poetry (Shijing)</div>
+            <div class="ft-desc">The oldest existing collection of Chinese poetry — 305 poems from the early Zhou dynasty. One of the Five Classics of Confucian literature.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- ANCIENT INDIA TAB -->
+      <div id="ft-india" class="ft-panel" style="display:none;">
+        <div class="ft-civ-header">🕉️ Ancient India</div>
+        <p style="color:#7A4A2A; font-style:italic; margin-bottom:1.5rem; font-size:0.95rem;">The great epics, philosophical texts, and historical works of ancient Indian civilization — from the Mahabharata to the Arthashastra.</p>
+
+        <div class="ft-grid">
+          <a href="https://www.gutenberg.org/ebooks/11441" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. Kisari Mohan Ganguli</div>
+            <div class="ft-title">The Mahabharata (Complete)</div>
+            <div class="ft-desc">The longest epic poem ever written — containing the Bhagavad Gita, the story of the Kurukshetra War, and the philosophical dialogues that shaped Hinduism.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/24869" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. Ralph T.H. Griffith</div>
+            <div class="ft-title">The Ramayana</div>
+            <div class="ft-desc">Valmiki's epic of Prince Rama — duty, devotion, righteousness, and the battle against evil. One of the foundational texts of Hindu culture and civilization.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/2388" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. Edwin Arnold</div>
+            <div class="ft-title">The Bhagavad Gita</div>
+            <div class="ft-desc">The Song of God — Krishna's teachings to Arjuna on duty, dharma, devotion, and the immortality of the soul. One of the most influential philosophical texts ever written.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.sacred-texts.com/hin/kaut/index.htm" target="_blank" class="ft-card">
+            <div class="ft-source">Sacred Texts · trans. R. Shamasastry</div>
+            <div class="ft-title">Arthashastra — Kautilya</div>
+            <div class="ft-desc">The ancient Indian treatise on statecraft, economic policy, and military strategy by Kautilya (Chanakya) — often compared to Machiavelli's The Prince.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.sacred-texts.com/hin/upan/index.htm" target="_blank" class="ft-card">
+            <div class="ft-source">Sacred Texts · trans. Max Müller</div>
+            <div class="ft-title">The Upanishads</div>
+            <div class="ft-desc">The philosophical heart of Hinduism — meditations on Brahman, Atman, and the nature of ultimate reality. The foundation of Vedanta philosophy.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/7785" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. Edwin Arnold</div>
+            <div class="ft-title">The Light of Asia — Life of the Buddha</div>
+            <div class="ft-desc">Edwin Arnold's poetic account of the life of Siddhartha Gautama — the most widely read account of the Buddha's life in the English language.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- PHILOSOPHY TAB -->
+      <div id="ft-philosophy" class="ft-panel" style="display:none;">
+        <div class="ft-civ-header">📖 Western Philosophy</div>
+        <p style="color:#7A4A2A; font-style:italic; margin-bottom:1.5rem; font-size:0.95rem;">Public domain texts of Western philosophy from ancient Greece through the 19th century.</p>
+
+        <div class="ft-sub">Ancient Philosophy</div>
+        <div class="ft-grid">
+          <a href="https://www.gutenberg.org/ebooks/1497" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. Benjamin Jowett</div>
+            <div class="ft-title">The Republic — Plato</div>
+            <div class="ft-desc">The most assigned philosophical text in history. Justice, the philosopher king, the allegory of the cave, and the ideal state.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/1656" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. Benjamin Jowett</div>
+            <div class="ft-title">The Apology, Crito &amp; Phaedo — Plato</div>
+            <div class="ft-desc">The trial, imprisonment, and death of Socrates — the founding narrative of Western philosophy.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/8438" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. F.H. Peters</div>
+            <div class="ft-title">Nicomachean Ethics — Aristotle</div>
+            <div class="ft-desc">Aristotle's foundational work on ethics — the good life, virtue, friendship, and eudaimonia (human flourishing).</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/2680" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. George Long</div>
+            <div class="ft-title">Meditations — Marcus Aurelius</div>
+            <div class="ft-desc">The private philosophical journal of the Stoic emperor — on duty, impermanence, and the inner life.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/45929" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. Elizabeth Carter</div>
+            <div class="ft-title">The Enchiridion — Epictetus</div>
+            <div class="ft-desc">The Stoic manual — what is in our control and what is not. One of the most practically useful philosophical texts ever written.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+        </div>
+
+        <div class="ft-sub" style="margin-top:1.5rem;">Early Modern Philosophy</div>
+        <div class="ft-grid">
+          <a href="https://www.gutenberg.org/ebooks/59" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg · trans. John Veitch</div>
+            <div class="ft-title">Meditations on First Philosophy — Descartes</div>
+            <div class="ft-desc">The cogito, the evil demon, and the mind-body problem. The most assigned single philosophical text in modern universities worldwide.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/9662" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg</div>
+            <div class="ft-title">Enquiry Concerning Human Understanding — Hume</div>
+            <div class="ft-desc">Hume's accessible treatment of causation, induction, miracles, and the limits of human knowledge.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/4705" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg</div>
+            <div class="ft-title">Second Treatise of Government — Locke</div>
+            <div class="ft-desc">The foundational text of liberal political philosophy — natural rights, consent of the governed, and the right to revolution.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/46333" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg</div>
+            <div class="ft-title">Groundwork of the Metaphysics of Morals — Kant</div>
+            <div class="ft-desc">The categorical imperative and the foundation of Kantian ethics. One of the most important works of moral philosophy ever written.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/30" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg</div>
+            <div class="ft-title">On Liberty — John Stuart Mill</div>
+            <div class="ft-desc">The harm principle and the foundational argument for individual freedom and free speech in liberal political theory.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/11224" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg</div>
+            <div class="ft-title">Utilitarianism — John Stuart Mill</div>
+            <div class="ft-desc">Mill's defense of the greatest happiness principle — the clearest and most widely read statement of utilitarian ethics.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/52190" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg</div>
+            <div class="ft-title">Beyond Good and Evil — Nietzsche</div>
+            <div class="ft-desc">Nietzsche's critique of traditional morality and philosophy — the will to power, master and slave morality, and the philosopher of the future.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+          <a href="https://www.gutenberg.org/ebooks/1998" target="_blank" class="ft-card">
+            <div class="ft-source">Gutenberg</div>
+            <div class="ft-title">Thus Spoke Zarathustra — Nietzsche</div>
+            <div class="ft-desc">Nietzsche's philosophical novel — the Übermensch, the eternal return, and the death of God. His most famous and literary work.</div>
+            <div class="ft-link">Read Free →</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- TRUSTED SOURCES -->
+      <div style="background:#F7F2E7; border:1px solid #C8B89A; padding:1.75rem; margin-top:2rem;">
+        <div style="font-family:'Cormorant SC',Georgia,serif; font-size:0.78rem; letter-spacing:0.2em; color:#9A7B2F; margin-bottom:1rem;">📚 Trusted Free Text Sources</div>
         <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1rem;">
           <a href="https://www.gutenberg.org" target="_blank" style="color:#3D2B1F; text-decoration:none; padding:0.75rem; border:1px solid #C8B89A; display:block;" onmouseover="this.style.borderColor='#9A7B2F'" onmouseout="this.style.borderColor='#C8B89A'">
             <div style="font-weight:600; font-family:'Playfair Display',serif; margin-bottom:0.25rem;">Project Gutenberg</div>
             <div style="font-size:0.85rem; color:#7A4A2A;">70,000+ free public domain books</div>
+          </a>
+          <a href="https://www.sacred-texts.com" target="_blank" style="color:#3D2B1F; text-decoration:none; padding:0.75rem; border:1px solid #C8B89A; display:block;" onmouseover="this.style.borderColor='#9A7B2F'" onmouseout="this.style.borderColor='#C8B89A'">
+            <div style="font-weight:600; font-family:'Playfair Display',serif; margin-bottom:0.25rem;">Sacred Texts Archive</div>
+            <div style="font-size:0.85rem; color:#7A4A2A;">World's religious &amp; sacred texts online</div>
+          </a>
+          <a href="https://etcsl.orinst.ox.ac.uk" target="_blank" style="color:#3D2B1F; text-decoration:none; padding:0.75rem; border:1px solid #C8B89A; display:block;" onmouseover="this.style.borderColor='#9A7B2F'" onmouseout="this.style.borderColor='#C8B89A'">
+            <div style="font-weight:600; font-family:'Playfair Display',serif; margin-bottom:0.25rem;">ETCSL — Oxford</div>
+            <div style="font-size:0.85rem; color:#7A4A2A;">Complete Sumerian literature corpus</div>
           </a>
           <a href="https://standardebooks.org" target="_blank" style="color:#3D2B1F; text-decoration:none; padding:0.75rem; border:1px solid #C8B89A; display:block;" onmouseover="this.style.borderColor='#9A7B2F'" onmouseout="this.style.borderColor='#C8B89A'">
             <div style="font-weight:600; font-family:'Playfair Display',serif; margin-bottom:0.25rem;">Standard Ebooks</div>
@@ -687,7 +1269,7 @@
           </a>
           <a href="https://archive.org" target="_blank" style="color:#3D2B1F; text-decoration:none; padding:0.75rem; border:1px solid #C8B89A; display:block;" onmouseover="this.style.borderColor='#9A7B2F'" onmouseout="this.style.borderColor='#C8B89A'">
             <div style="font-weight:600; font-family:'Playfair Display',serif; margin-bottom:0.25rem;">Internet Archive</div>
-            <div style="font-size:0.85rem; color:#7A4A2A;">Millions of free books, texts, and media</div>
+            <div style="font-size:0.85rem; color:#7A4A2A;">Millions of free books, texts &amp; media</div>
           </a>
         </div>
       </div>
@@ -756,3 +1338,18 @@
     <div class="footer-logo">Solon Academy</div>
     <div class="footer-text">© 2026 A. Solon · thesolonacademy.org · All rights reserved</div>
     <div class="footer-quote">"The more I learn, the more I realize how much I don't know." — Socrates</div>
+  </footer>
+
+  <script>
+    function showTab(id) {
+      document.querySelectorAll('.ft-panel').forEach(p => p.style.display = 'none');
+      document.querySelectorAll('.ft-tab').forEach(t => t.classList.remove('ft-active'));
+      document.getElementById(id).style.display = 'block';
+      event.target.classList.add('ft-active');
+    }
+    function toggleBook(header) {
+      header.parentElement.classList.toggle('open');
+    }
+  </script>
+</body>
+</html>
